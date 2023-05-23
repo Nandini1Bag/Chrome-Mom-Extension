@@ -23,15 +23,17 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
             <img src=${data.image.small} />
             <span>${data.name}</span>
         `
-        /**
-         * 1. Current price (data.market_data.current_price.usd)
-         * 2. 24-hour high price (data.market_data.high_24h.usd)
-         * 3. 24-hour low price (data.market_data.low_24h.usd)
-         */
         document.getElementById("crypto").innerHTML += `
-            <p>🎯: $${data.market_data.current_price.usd}</p> 
+            <p>🎯: $${data.market_data.current_price.usd}</p>
             <p>👆: $${data.market_data.high_24h.usd}</p>
             <p>👇: $${data.market_data.low_24h.usd}</p>
         `
     })
     .catch(err => console.error(err))
+
+function getCurrentTime() {
+    const date = new Date()
+    document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
+}
+
+setInterval(getCurrentTime, 1000)
